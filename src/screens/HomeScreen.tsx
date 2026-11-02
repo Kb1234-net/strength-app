@@ -6,9 +6,10 @@ import { TRAINING_PLAN } from '../data/plan'
 
 type HomeScreenProps = {
   onSelectDay: (dayId: string) => void
+  onOpenCalendar: () => void
 }
 
-export function HomeScreen({ onSelectDay }: HomeScreenProps) {
+export function HomeScreen({ onSelectDay, onOpenCalendar  }: HomeScreenProps) {
 
   const [exportMessage, setExportMessage] = useState('')
   async function handleExport() {
@@ -36,6 +37,13 @@ export function HomeScreen({ onSelectDay }: HomeScreenProps) {
         ))}
       </div>
          <div className="grid gap-3 px-4 pt-2">
+    <button
+      type="button"
+      onClick={onOpenCalendar}
+      className="rounded-xl border border-slate-700 py-3 font-semibold text-emerald-400 active:bg-slate-800"
+    >
+      📅 Consistency calendar
+    </button>
      <button
        type="button"
        onClick={handleExport}
