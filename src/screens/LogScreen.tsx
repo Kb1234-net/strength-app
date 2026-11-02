@@ -10,6 +10,7 @@ import { findExercise } from '../data/plan'
 
 type LogScreenProps = {
   exerciseId: string
+  dayId: string
   onShowHistory: () => void
   onBack: () => void
 }
@@ -17,7 +18,7 @@ type LogScreenProps = {
 const WEIGHT_STEP_LB = 5
 const REPS_STEP = 1
 
-export function LogScreen({ exerciseId, onShowHistory, onBack }: LogScreenProps) {
+export function LogScreen({ exerciseId, dayId, onShowHistory, onBack }: LogScreenProps) {
   const exercise = findExercise(exerciseId)
   const today = todayAsString()
 
@@ -62,7 +63,7 @@ export function LogScreen({ exerciseId, onShowHistory, onBack }: LogScreenProps)
       return
     }
     // Inputs are deliberately NOT cleared: your next set is usually the same weight.
-    await addSet(exerciseId, weight, reps)
+    await addSet(exerciseId, dayId, weight, reps)
   }
 
   function adjustWeight(change: number) {
