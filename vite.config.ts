@@ -13,8 +13,8 @@ export default defineConfig({
 
       // The "manifest" is what makes the phone treat this site as an installable app
       manifest: {
-        name: 'Lifestyle App',
-        short_name: 'Lifestyle',
+        name: 'Strength Tracker',
+        short_name: 'Tracker',
         description: 'Workouts, macros, and reminders for me and my family',
         theme_color: '#0f172a',
         background_color: '#0f172a',
@@ -22,6 +22,7 @@ export default defineConfig({
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
     }),
