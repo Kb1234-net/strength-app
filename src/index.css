@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+/* Match the app's dark background so no white shows at the edges or when scrolling past the end */
+body {
+  background-color: #020617; /* Tailwind's slate-950 */
+  -webkit-tap-highlight-color: transparent;
+}
