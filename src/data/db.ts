@@ -10,6 +10,7 @@ import Dexie, { type EntityTable } from 'dexie'
 export type LoggedSet = {
   id?: number // filled in automatically by the database
   exerciseId: string // matches an id in plan.ts
+  dayId?: string // which training day this was logged under (sets saved before this was added don't have it)
   date: string // the workout day, as "YYYY-MM-DD"
   weightLb: number
   reps: number
@@ -74,9 +75,10 @@ export async function getPreviousSession(exerciseId: string, beforeDate: string)
 
 // ---------- Changes ----------
 
-export async function addSet(exerciseId: string, weightLb: number, reps: number): Promise<void> {
+export async function addSet(exerciseId: string, dayId: string, weightLb: number, reps: number): Promise<void> {
   await db.sets.add({
     exerciseId: exerciseId,
+    dayId: dayId,
     date: todayAsString(),
     weightLb: weightLb,
     reps: reps,

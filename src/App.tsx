@@ -42,6 +42,7 @@ function App() {
           // The key makes React start fresh (re-run the pre-fill) when you switch exercises.
           key={screen.exerciseId}
           exerciseId={screen.exerciseId}
+          dayId={screen.dayId}
           onShowHistory={() =>
             setScreen({ name: 'history', dayId: screen.dayId, exerciseId: screen.exerciseId })
           }
