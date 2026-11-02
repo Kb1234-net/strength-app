@@ -1,5 +1,6 @@
 // First screen: pick which training day you're doing.
-
+import { useState } from 'react'
+import { downloadWorkoutCsv } from '../data/exportCsv'
 import { Header } from '../components/Header'
 import { TRAINING_PLAN } from '../data/plan'
 
@@ -8,6 +9,12 @@ type HomeScreenProps = {
 }
 
 export function HomeScreen({ onSelectDay }: HomeScreenProps) {
+
+  const [exportMessage, setExportMessage] = useState('')
+  async function handleExport() {
+    const setCount = await downloadWorkoutCsv()
+    setExportMessage(`Exported ${setCount} sets.`)
+  }
   return (
     <>
       <Header title="Strength" subtitle="What are you training today?" />
@@ -28,6 +35,16 @@ export function HomeScreen({ onSelectDay }: HomeScreenProps) {
           </button>
         ))}
       </div>
+         <div className="grid gap-3 px-4 pt-2">
+     <button
+       type="button"
+       onClick={handleExport}
+       className="rounded-xl border border-slate-700 py-3 font-semibold text-slate-300 active:bg-slate-800"
+     >
+       ⬇ Export my data (CSV)
+     </button>
+     {exportMessage && <p className="text-center text-sm text-slate-400">{exportMessage}</p>}
+   </div>
     </>
   )
 }
