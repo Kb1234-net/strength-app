@@ -4,6 +4,7 @@
 // That's plenty for four screens; a router library can come later if needed.
 
 import { useState } from 'react'
+import { CalendarScreen } from './screens/CalendarScreen'
 import { DayScreen } from './screens/DayScreen'
 import { HistoryScreen } from './screens/HistoryScreen'
 import { HomeScreen } from './screens/HomeScreen'
@@ -14,6 +15,7 @@ type Screen =
   | { name: 'day'; dayId: string }
   | { name: 'log'; dayId: string; exerciseId: string }
   | { name: 'history'; dayId: string; exerciseId: string }
+  | { name: 'calendar' }
 
 function App() {
   const [screen, setScreen] = useState<Screen>({ name: 'home' })
@@ -21,7 +23,10 @@ function App() {
   return (
     <main className="mx-auto min-h-screen max-w-md bg-slate-950 pb-10">
       {screen.name === 'home' && (
-        <HomeScreen onSelectDay={(dayId) => setScreen({ name: 'day', dayId })} />
+        <HomeScreen
+          onSelectDay={(dayId) => setScreen({ name: 'day', dayId })}
+          onOpenCalendar={() => setScreen({ name: 'calendar' })}
+        />
       )}
 
       {screen.name === 'day' && (
@@ -50,6 +55,8 @@ function App() {
           onBack={() => setScreen({ name: 'log', dayId: screen.dayId, exerciseId: screen.exerciseId })}
         />
       )}
+
+      {screen.name === 'calendar' && <CalendarScreen onBack={() => setScreen({ name: 'home' })} />}
     </main>
   )
 }
